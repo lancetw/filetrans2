@@ -19,13 +19,13 @@ DEBUG mode:
     
 Use (server side):
 
-    $ ./filetrans
+    $ ./filetrans2
     
 Use (client side):
 
     (U: Upload mode / D: Download mode)
-    $ ./filetrans 127.0.0.1 U upload/sample.txt
-    $ ./filetrans 127.0.0.1 D upload/sample_small.jpg
+    $ ./filetrans2 127.0.0.1 U uploads/sample.txt
+    $ ./filetrans2 127.0.0.1 D uploads/sample_small.jpg
     
 Screenshot:
 
