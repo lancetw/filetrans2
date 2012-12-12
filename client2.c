@@ -147,6 +147,12 @@ int client_mode(char* server, char mode, char* filename) {
         DEBUG("File name: %s\n", filename);
         
         fp = fopen(filename, "rb, ccs=UTF-8");
+        if (!fp) {
+            printf("找不到 %s%s\n", _path, filename);
+            close(fd);
+            close(client_sockfd);
+            exit(EXIT_FAILURE);
+        }
 
         /* 開始傳送資料 */
 
