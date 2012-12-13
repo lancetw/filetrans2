@@ -34,30 +34,46 @@ int main(int argc, char *argv[]) {
         strcpy(server, argv[1]);
         printf("正在連線到 %s:%d ...\n", server, PORT);
         
-        if (argc >= 3) {
+        if (strlen(argv[2]) == 1) {
             strcpy(&mode, argv[2]);
-            strcpy(filename, argv[3]);
-        } else {
-            printf("請提供檔案名稱、上傳或下載模式（U/D）！\n");
-            perror("argv[2], argv[3] 呼叫失敗");
-            exit(EXIT_FAILURE);   
         }
         
-        client_mode(server, mode, filename);
+        if (strlen(argv[3]) > 0) {
+            strcpy(filename, argv[3]);
+        }
+        
+        if (mode == 'D' || mode == 'U') {
+            client_mode(server, mode, filename);
+        } else {
+            printf("請提供正確的上傳或下載模式（U/D）！\n");
+            exit(EXIT_FAILURE); 
+        }
         
     } else {
         /* 使用預設伺服器資訊 */
         strcpy(server, SERVER);
         
         if (argc > 2) {
-            strcpy(&mode, argv[1]);
-            strcpy(filename, argv[2]);
+            
+            if (strlen(argv[1]) == 1) {
+                strcpy(&mode, argv[1]);
+            }
+            
+            if (strlen(argv[2]) > 0) {
+                strcpy(filename, argv[2]);
+            }
+            
+            if (mode == 'D' || mode == 'U') {
+                client_mode(server, mode, filename);
+            } else {
+                printf("請提供正確的上傳或下載模式（U/D）！\n");
+                exit(EXIT_FAILURE); 
+            }
             
             client_mode(server, mode, filename);
             
         } else if (argc == 2) {
             printf("請提供檔案名稱、上傳或下載模式（U/D）！\n");
-            perror("argv[1], argv[2] 呼叫失敗");
             exit(EXIT_FAILURE);  
           
         } else {
